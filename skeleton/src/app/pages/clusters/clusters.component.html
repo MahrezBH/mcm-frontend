@@ -1,0 +1,121 @@
+<vex-page-layout>
+    <vex-page-layout-header class="pb-16 flex flex-col items-start justify-center">
+        <div [class.container]="layoutCtrl.value === 'boxed'" [class.px-6]="layoutCtrl.value === 'fullwidth'"
+            class="w-full flex flex-col sm:flex-row justify-between">
+            <div>
+                <h1 class="title mt-0 mb-1">Clusters</h1>
+                <vex-breadcrumbs [crumbs]="['Apps', 'Clusters']"></vex-breadcrumbs>
+            </div>
+            <div class="hidden sm:block">
+                <mat-button-toggle-group [formControl]="layoutCtrl" class="mt-4 sm:mt-0">
+                    <mat-button-toggle value="boxed">Boxed</mat-button-toggle>
+                    <mat-button-toggle value="fullwidth">Full-Width</mat-button-toggle>
+                </mat-button-toggle-group>
+            </div>
+        </div>
+    </vex-page-layout-header>
+
+    <vex-page-layout-content [class.container]="layoutCtrl.value === 'boxed'"
+        [class.px-6]="layoutCtrl.value === 'fullwidth'" class="-mt-6">
+        <div class="card overflow-auto -mt-16">
+            <div class="bg-app-bar px-6 h-16 border-b sticky left-0 flex items-center">
+                <h2
+                    class="title my-0 ltr:pr-4 rtl:pl-4 ltr:mr-4 rtl:ml-4 ltr:border-r rtl:border-l hidden sm:block flex-none">
+                    Clusters</h2>
+                <span class="flex-1"></span>
+
+                <button (click)="getClusters()" class="ml-4 flex-none" color="primary" mat-mini-fab matTooltip="Refresh"
+                    type="button">
+                    <mat-icon svgIcon="mat:refresh"></mat-icon>
+                </button>
+                <button (click)="createCluster()" class="ml-4 flex-none" color="primary" mat-mini-fab
+                    matTooltip="Create Cluster" type="button">
+                    <mat-icon svgIcon="mat:add"></mat-icon>
+                </button>
+            </div>
+            <div *ngIf="loading" class="flex justify-center items-center p-8">
+                <mat-progress-spinner mode="indeterminate" color="primary"></mat-progress-spinner>
+            </div>
+            <div *ngIf="clusters.length === 0 && !loading" class="p-4 text-center">
+                <p>Nothing to show...</p>
+            </div>
+            <table *ngIf="clusters.length && !loading" @stagger [dataSource]="dataSource" class="w-full" mat-table
+                matSort>
+                <!-- Cluster Columns -->
+                <ng-container matColumnDef="cluster_name">
+                    <th mat-header-cell *matHeaderCellDef> Name </th>
+                    <td mat-cell *matCellDef="let cluster"> {{cluster.name}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="cluster_location">
+                    <th mat-header-cell *matHeaderCellDef> Location </th>
+                    <td mat-cell *matCellDef="let cluster"> {{cluster.location}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="cluster_kubernetes_version">
+                    <th mat-header-cell *matHeaderCellDef> Kubernetes Version </th>
+                    <td mat-cell *matCellDef="let cluster"> {{cluster.kubernetes_version}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="cluster_service_external_ip">
+                    <th mat-header-cell *matHeaderCellDef> External IP </th>
+                    <td mat-cell *matCellDef="let cluster"> {{cluster.service_external_ip}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="cluster_actions">
+                    <th mat-header-cell *matHeaderCellDef> Actions </th>
+                    <td mat-cell *matCellDef="let cluster">
+                        <button mat-raised-button (click)="toggleNodes(cluster)" class="mr-1">
+                            <mat-icon svgIcon="mat:arrow_drop_down"></mat-icon>
+                            <span>Toggle Nodes</span>
+                        </button>
+                        <button mat-raised-button (click)="confirmAction('delete', cluster.name, null)">
+                            <mat-icon svgIcon="mat:delete"></mat-icon>
+                            <span>Delete</span>
+                        </button>
+                    </td>
+                </ng-container>
+
+                <!-- Node Columns -->
+                <ng-container matColumnDef="node_name">
+                    <th mat-header-cell *matHeaderCellDef> Node Name </th>
+                    <td mat-cell *matCellDef="let node"> {{node.name}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="node_status">
+                    <!-- <th mat-header-cell *matHeaderCellDef> Status </th> -->
+                    <td mat-cell *matCellDef="let node"> Status: {{node.status}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="node_addresses">
+                    <th mat-header-cell *matHeaderCellDef> Addresses </th>
+                    <td mat-cell *matCellDef="let node">
+                        <div *ngFor="let address of node.addresses">
+                            {{address.type}}: {{address.address}}
+                        </div>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="node_actions">
+                    <th mat-header-cell *matHeaderCellDef> Actions </th>
+                    <td mat-cell *matCellDef="let node">
+                        <button mat-raised-button
+                            (click)="confirmAction('drain', node.clusterName, node.name)">Drain</button>
+                        <button mat-raised-button
+                            (click)="confirmAction('uncordon',  node.clusterName, node.name)">Uncordon</button>
+                    </td>
+                </ng-container>
+
+                <!-- Header Row -->
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+
+                <!-- Cluster Data Rows -->
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="example-element-row"></tr>
+
+                <!-- Node Data Rows -->
+                <tr mat-row *matRowDef="let node; columns: nodeColumns; when: isNodeRow" class="example-detail-row">
+                </tr>
+            </table>
+        </div>
+    </vex-page-layout-content>
+</vex-page-layout>

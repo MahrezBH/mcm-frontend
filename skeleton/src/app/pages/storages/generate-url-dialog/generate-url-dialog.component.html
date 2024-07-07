@@ -1,0 +1,14 @@
+<h1 mat-dialog-title>Generate URL</h1>
+<div mat-dialog-content>
+    <p>Enter the timeout in seconds for the URL:</p>
+    <div class="input-container">
+        <mat-form-field appearance="fill">
+            <mat-label>Enter Number</mat-label>
+            <input matInput [formControl]="timeout" (input)="preventNonNumeric($event)">
+        </mat-form-field>
+    </div>
+</div>
+<div class="mat-dialog-actions">
+    <button mat-menu-item mat-button (click)="onNoClick()">Cancel</button>
+    <button mat-button (click)="generateUrl()">Generate</button>
+</div>

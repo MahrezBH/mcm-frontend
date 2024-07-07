@@ -1,0 +1,21 @@
+.form-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.center-label {
+    margin-right: 8px;
+}
+
+.center-form-field {
+    flex-grow: 1;
+}
+
+.upload-drop-zone {
+    border: 2px dashed #ccc;
+    padding: 16px;
+    text-align: center;
+    cursor: pointer;
+}

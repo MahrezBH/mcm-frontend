@@ -1,0 +1,165 @@
+<form (ngSubmit)="save()" [formGroup]="form">
+  <div class="flex items-center" mat-dialog-title>
+
+    <h2 *ngIf="form.controls.name.value" class="headline m-0 flex-auto">
+      Instance: {{ form.controls.name.value }}
+    </h2>
+    <h2 *ngIf="!form.controls.name.value" class="headline m-0 flex-auto">
+      New Instance
+    </h2>
+
+    <!-- <button [matMenuTriggerFor]="settingsMenu" class="text-secondary" mat-icon-button type="button">
+      <mat-icon svgIcon="mat:more_vert"></mat-icon>
+    </button> -->
+
+    <button class="text-secondary" mat-dialog-close mat-icon-button type="button">
+      <mat-icon svgIcon="mat:close"></mat-icon>
+    </button>
+  </div>
+
+  <mat-divider class="text-border"></mat-divider>
+
+  <mat-dialog-content class="flex flex-col">
+    <div class="flex flex-col sm:flex-row">
+      <mat-form-field class="flex-auto">
+        <mat-label>Name</mat-label>
+        <input cdkFocusInitial formControlName="name" matInput />
+        <!-- <mat-icon matIconPrefix svgIcon="mat:person"></mat-icon> -->
+      </mat-form-field>
+    </div>
+
+
+    <mat-form-field class="flex-auto">
+      <mat-label>Provider</mat-label>
+      <mat-select formControlName="provider">
+        <mat-option value="aws">AWS</mat-option>
+        <mat-option value="hetzner">Hetzner</mat-option>
+        <mat-option value="gcp">GCP</mat-option>
+        <mat-option value="azure">Azure</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <div class="flex flex-col sm:flex-row">
+      <mat-form-field class="flex-auto m-1">
+        <mat-label>Machine Type</mat-label>
+        <mat-select formControlName="machine_type">
+          <mat-option *ngFor="let type of availableMachineTypes" [value]="type">{{ type }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="flex-auto m-1">
+        <mat-label>Zone</mat-label>
+        <mat-select formControlName="zone">
+          <mat-option *ngFor="let zone of availableZones" [value]="zone">{{ zone }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+    </div>
+
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close type="button">Cancel</button>
+    <button *ngIf="isCreateMode()" color="primary" mat-flat-button type="submit">
+      Create instance
+    </button>
+    <button *ngIf="isUpdateMode()" color="primary" mat-flat-button type="submit">
+      Update instance
+    </button>
+  </mat-dialog-actions>
+</form>
+
+
+
+
+
+
+
+
+
+<!-- 
+
+
+<form (ngSubmit)="save()" [formGroup]="form">
+  <div class="flex items-center" mat-dialog-title>
+    <h2 *ngIf="!form.controls.name.value" class="headline m-0 flex-auto">
+      New Instance
+    </h2>
+    <h2 *ngIf="form.controls.name.value" class="headline m-0 flex-auto">
+      {{ form.controls.name.value }}
+    </h2>
+    <button [matMenuTriggerFor]="settingsMenu" class="text-secondary" mat-icon-button type="button">
+      <mat-icon svgIcon="mat:more_vert"></mat-icon>
+    </button>
+    <button class="text-secondary" mat-dialog-close mat-icon-button type="button">
+      <mat-icon svgIcon="mat:close"></mat-icon>
+    </button>
+  </div>
+
+  <mat-divider class="text-border"></mat-divider>
+
+  <mat-dialog-content class="flex flex-col">
+    <div class="flex flex-col sm:flex-row">
+      <mat-form-field class="flex-auto">
+        <mat-label>Name</mat-label>
+        <input cdkFocusInitial formControlName="name" matInput />
+      </mat-form-field>
+    </div>
+
+    <mat-form-field class="flex-auto">
+      <mat-label>Provider</mat-label>
+      <mat-select formControlName="provider">
+        <mat-option value="aws">AWS</mat-option>
+        <mat-option value="hetzner">Hetzner</mat-option>
+        <mat-option value="gcp">GCP</mat-option>
+        <mat-option value="azure">Azure</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="flex-auto">
+      <mat-label>Machine Type</mat-label>
+      <mat-select formControlName="machine_type">
+        <mat-option value="t2.micro">t2.micro</mat-option>
+        <mat-option value="Standard_DS1_v2">Standard_DS1_v2</mat-option>
+        <mat-option value="n1-standard-1">n1-standard-1</mat-option>
+        <mat-option value="cpx41">cpx41</mat-option>
+        <mat-option value="cpx51">cpx51</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="flex-auto">
+      <mat-label>Zone</mat-label>
+      <mat-select formControlName="zone">
+        <mat-option value="us-east-1b">us-east-1b</mat-option>
+        <mat-option value="hel1-dc2">hel1-dc2</mat-option>
+        <mat-option value="europe-west1-b">europe-west1-b</mat-option>
+        <mat-option value="francecentral">francecentral</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close type="button">Cancel</button>
+    <button *ngIf="isCreateMode()" color="primary" mat-flat-button type="submit">
+      Create Instance
+    </button>
+    <button *ngIf="isUpdateMode()" color="primary" mat-flat-button type="submit">
+      Update Instance
+    </button>
+  </mat-dialog-actions>
+</form>
+
+<mat-menu #settingsMenu="matMenu" xPosition="before" yPosition="below">
+  <button mat-menu-item>
+    <mat-icon svgIcon="mat:print"></mat-icon>
+    <span>Print</span>
+  </button>
+  <button mat-menu-item>
+    <mat-icon svgIcon="mat:download"></mat-icon>
+    <span>Export</span>
+  </button>
+  <button mat-menu-item>
+    <mat-icon svgIcon="mat:delete"></mat-icon>
+    <span>Delete</span>
+  </button>
+</mat-menu> -->

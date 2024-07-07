@@ -1,0 +1,54 @@
+.url-display-container {
+    display: flex;
+    align-items: center;
+    /* Vertically centers the content in the container */
+    justify-content: center;
+    /* Horizontally centers the content */
+    flex-direction: column;
+    /* Aligns the content vertically */
+    text-align: center;
+    padding: 20px;
+}
+
+.url-text {
+    margin-bottom: 20px;
+    /* Provides spacing between the URL and the copy button */
+    font-family: 'Roboto', 'Helvetica Neue', sans-serif;
+    font-size: 18px;
+    color: #333;
+    /* Standard text color, change as needed */
+    text-decoration: none;
+    /* Removes underline from links */
+    cursor: pointer;
+    /* Indicates that the text is clickable */
+}
+
+.url-text:hover {
+    text-decoration: none;
+    /* Adds underline on hover for better UI indication */
+}
+
+.dialog-actions {
+    justify-content: center;
+    /* Centers the actions within the dialog */
+    padding: 20px;
+}
+
+mat-icon-button {
+    background: #e0e0e0;
+    /* Light grey background for the button */
+    border-radius: 50%;
+    /* Makes the button circular */
+    width: 40px;
+    /* Fixed width */
+    height: 40px;
+    /* Fixed height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+mat-icon {
+    color: #333;
+    /* Dark color for the icon for contrast */
+}

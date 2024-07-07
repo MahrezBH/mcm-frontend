@@ -1,0 +1,51 @@
+@import "~simplebar/dist/simplebar.css";
+@import "~highlight.js/styles/androidstudio.css";
+// Vex Core
+@import "./@vex/styles/core";
+
+/*
+  You can override any CSS Variable or style here
+  Example:
+
+  :root {
+   --vex-sidenav-background: #333333;
+  }
+
+  All possible variables can be found in @vex/styles/core or by simply inspecting the element you want to change
+  in Chrome/Firefox DevTools
+*/
+
+/**
+  Uncomment the below code and adjust the values to fit your colors, the application will automatically adjust
+ */
+// html {
+//   // --vex-color-primary: blue;
+//   // --vex-color-primary-contrast: white;
+
+//   // --vex-color-accent: yellow;
+//   // --vex-color-accent-contrast: black;
+
+//   // --vex-color-warn: yellow;
+//   // --vex-color-warn-contrast: black;
+// }
+
+:root {
+  // --container-width: 1200px;
+  // --padding: 24px;
+  // --font: 'Inter', 'Helvetica Neue', sans-serif;
+  --font-weight-semi-bold: 500;
+
+  // --text-color: #{$dark-primary-text};
+  // --sidenav-width: 280px;
+  // --sidenav-background: #{$sidenav-background};
+  // --sidenav-color: white;
+  .mat-mdc-menu-panel {
+    max-width: fit-content;
+  }
+
+  .mat,
+  tr,
+  th {
+    --font: 'Inter var';
+  }
+}

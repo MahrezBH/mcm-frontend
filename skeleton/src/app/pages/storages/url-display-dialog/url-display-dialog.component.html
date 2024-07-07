@@ -1,0 +1,13 @@
+<h1 mat-dialog-title>Generated URL</h1>
+<div mat-dialog-content class="url-display-container">
+    <!-- <a href="{{ data.url }}" target="_blank" class="url-text">
+        {{ data.url }}
+    </a> -->
+    Click button to copy
+    <button mat-icon-button (click)="copyUrl()" aria-label="Copy URL" matTooltip="Copy URL">
+        <mat-icon svgIcon="mat:content_copy"></mat-icon>
+    </button>
+</div>
+<div mat-dialog-actions class="dialog-actions">
+    <button mat-button (click)="closeDialog()">Close</button>
+</div>

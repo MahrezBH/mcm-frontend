@@ -1,0 +1,34 @@
+<div class="vex-user-menu">
+  <a (click)="close()" [routerLink]="['/apps/social']" class="vex-user-menu-item" matRipple
+    matRippleColor="rgb(var(--vex-color-primary-600), 0.1)">
+    <mat-icon class="vex-user-menu-item__icon icon-sm" svgIcon="mat:account_circle"></mat-icon>
+    <div class="vex-user-menu-item__label">Your Profile</div>
+  </a>
+
+  <a (click)="close()" [routerLink]="['/']" class="vex-user-menu-item" matRipple
+    matRippleColor="rgb(var(--vex-color-primary-600), 0.1)">
+    <mat-icon class="vex-user-menu-item__icon icon-sm" svgIcon="mat:insights"></mat-icon>
+    <div class="vex-user-menu-item__label">Analytics</div>
+    <div class="vex-user-menu-item__badge">NEW</div>
+  </a>
+
+  <a (click)="close()" [routerLink]="['/apps/social/timeline']" class="vex-user-menu-item" matRipple
+    matRippleColor="rgb(var(--vex-color-primary-600), 0.1)">
+    <mat-icon class="vex-user-menu-item__icon icon-sm" svgIcon="mat:settings"></mat-icon>
+    <div class="vex-user-menu-item__label">Account Settings</div>
+  </a>
+
+  <div class="border-b border-divider mx-4"></div>
+
+  <div class="vex-user-menu-item" matRipple matRippleColor="rgb(var(--vex-color-primary-600), 0.1)">
+    <mat-icon class="vex-user-menu-item__icon icon-sm" svgIcon="mat:switch_account"></mat-icon>
+    <div class="vex-user-menu-item__label">Switch Account</div>
+    <mat-icon class="vex-user-menu-item__icon icon-sm" svgIcon="mat:chevron_right"></mat-icon>
+  </div>
+
+  <a (click)="close()" [routerLink]="['/login']" class="vex-user-menu-item" matRipple
+    matRippleColor="rgb(var(--vex-color-primary-600), 0.1)">
+    <mat-icon class="vex-user-menu-item__icon icon-sm" svgIcon="mat:logout"></mat-icon>
+    <div class="vex-user-menu-item__label">Sign Out</div>
+  </a>
+</div>

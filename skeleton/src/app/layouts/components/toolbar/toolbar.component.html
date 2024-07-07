@@ -1,0 +1,115 @@
+<div [class.container]="isVerticalLayout$ | async" class="toolbar text-default w-full px-6 flex items-center">
+  <button (click)="openSidenav()" [class.hidden]="isDesktop$ | async" mat-icon-button type="button">
+    <mat-icon svgIcon="mat:menu"></mat-icon>
+  </button>
+
+  <a *ngIf="isVerticalLayout$ | async" [routerLink]="['/']" class="ltr:mr-4 rtl:ml-4 flex items-center">
+    <img alt="Logo" class="w-8 select-none" style="height: 50px;width: 60px;" src="assets/img/logo/logo.jpg" />
+    <h1 [class.hidden]="isDesktop$ | async" class="text-2xl font-bold tracking-wide ltr:pl-4 rtl:pr-4 m-0 select-none">
+      {{ title$ | async }}
+    </h1>
+  </a>
+
+  <button *ngIf="isHorizontalLayout$ | async" [class.hidden]="!(isDesktop$ | async)" [matMenuTriggerFor]="addNewMenu"
+    color="primary" mat-flat-button type="button">
+    Add New
+  </button>
+
+  <mat-menu #addNewMenu="matMenu" [overlapTrigger]="false" xPosition="after" yPosition="below">
+    <button mat-menu-item>
+      <mat-icon svgIcon="mat:person_add"></mat-icon>
+      <span>Add Contact</span>
+    </button>
+
+    <button mat-menu-item>
+      <mat-icon svgIcon="mat:done_all"></mat-icon>
+      <span>Add Task</span>
+    </button>
+
+    <button mat-menu-item>
+      <mat-icon svgIcon="mat:assignment_turned_in"></mat-icon>
+      <span>Add Project</span>
+    </button>
+
+    <button [matMenuTriggerFor]="documentMenu" mat-menu-item>
+      <mat-icon svgIcon="mat:ballot"></mat-icon>
+      <span>Add Document</span>
+    </button>
+  </mat-menu>
+
+  <mat-menu #documentMenu="matMenu">
+    <button mat-menu-item>
+      <mat-icon svgIcon="mat:description"></mat-icon>
+      <span>Add Quote</span>
+    </button>
+
+    <button mat-menu-item>
+      <mat-icon svgIcon="mat:assignment"></mat-icon>
+      <span>Add Invoice</span>
+    </button>
+
+    <button mat-menu-item>
+      <mat-icon svgIcon="mat:receipt"></mat-icon>
+      <span>Add Receipt</span>
+    </button>
+  </mat-menu>
+
+  <div #megaMenuOriginRef class="ltr:ml-2 rtl:mr-2">
+    <button (click)="openMegaMenu(megaMenuOriginRef)" *ngIf="isHorizontalLayout$ | async"
+      [class.hidden]="!(isDesktop$ | async)" [ngClass]="{ 'bg-primary-600/10': megaMenuOpen$ | async }" color="primary"
+      mat-button type="button">
+      <span>Mega Menu</span>
+      <mat-icon class="icon-sm" svgIcon="mat:arrow_drop_down"></mat-icon>
+    </button>
+  </div>
+
+  <div *ngIf="(isVerticalLayout$ | async) && (isNavbarInToolbar$ | async)" [class.hidden]="!(isDesktop$ | async)"
+    class="px-6 flex-none flex items-center">
+    <vex-navigation-item *ngFor="let item of navigationItems$ | async" [item]="item"></vex-navigation-item>
+  </div>
+
+  <span class="flex-1"></span>
+
+  <div class="-mx-1 flex items-center">
+    <div class="px-1">
+      <button (click)="openSearch()" mat-icon-button type="button">
+        <mat-icon color="primary" svgIcon="mat:search"></mat-icon>
+      </button>
+    </div>
+
+    <div class="px-1">
+      <vex-toolbar-notifications></vex-toolbar-notifications>
+    </div>
+
+    <div class="px-1">
+      <button (click)="openQuickpanel()" mat-icon-button type="button">
+        <mat-icon color="primary" svgIcon="mat:bookmarks"></mat-icon>
+      </button>
+    </div>
+
+    <div class="px-1">
+      <button [matMenuTriggerFor]="languageMenu" mat-icon-button type="button">
+        <mat-icon svgIcon="flag:united-states"></mat-icon>
+      </button>
+    </div>
+
+    <div *ngIf="userVisible$ | async" class="px-1">
+      <vex-toolbar-user></vex-toolbar-user>
+    </div>
+
+    <mat-menu #languageMenu="matMenu" overlapTrigger="false" xPosition="before" yPosition="below">
+      <button mat-menu-item>
+        <mat-icon svgIcon="flag:united-states"></mat-icon>
+        <span>English</span>
+      </button>
+
+      <button mat-menu-item>
+        <mat-icon svgIcon="flag:germany"></mat-icon>
+        <span>German</span>
+      </button>
+    </mat-menu>
+  </div>
+</div>
+
+<vex-navigation *ngIf="(isVerticalLayout$ | async) && (isNavbarBelowToolbar$ | async)"
+  [class.hidden]="!(isDesktop$ | async)"></vex-navigation>

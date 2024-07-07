@@ -1,0 +1,46 @@
+<form (ngSubmit)="save()" [formGroup]="form">
+  <div class="flex items-center" mat-dialog-title>
+
+    <h2 *ngIf="form.controls.key.value" class="headline m-0 flex-auto">
+      Secret: {{ form.controls.key.value }}
+    </h2>
+    <h2 *ngIf="!form.controls.key.value" class="headline m-0 flex-auto">
+      New Secret
+    </h2>
+
+    <!-- <button [matMenuTriggerFor]="settingsMenu" class="text-secondary" mat-icon-button type="button">
+      <mat-icon svgIcon="mat:more_vert"></mat-icon>
+    </button> -->
+
+    <button class="text-secondary" mat-dialog-close mat-icon-button type="button">
+      <mat-icon svgIcon="mat:close"></mat-icon>
+    </button>
+  </div>
+
+  <mat-divider class="text-border"></mat-divider>
+
+  <mat-dialog-content class="flex flex-col">
+    <div class="flex flex-col sm:flex-row">
+      <mat-form-field class="flex-auto">
+        <mat-label>Name</mat-label>
+        <input cdkFocusInitial formControlName="key" matInput />
+        <!-- <mat-icon matIconPrefix svgIcon="mat:person"></mat-icon> -->
+      </mat-form-field>
+    </div>
+    <div class="flex flex-col sm:flex-row">
+      <mat-form-field class="flex-auto">
+        <mat-label>Value</mat-label>
+        <textarea cdkAutosizeMinRows="2" formControlName="value" cdkTextareaAutosize matInput
+          placeholder="Write the secret value ..."></textarea>
+        <!-- <mat-icon matIconPrefix svgIcon="mat:person"></mat-icon> -->
+      </mat-form-field>
+    </div>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close type="button">Cancel</button>
+    <button *ngIf="isCreateMode()" color="primary" mat-flat-button type="submit">
+      Create Secret
+    </button>
+  </mat-dialog-actions>
+</form>

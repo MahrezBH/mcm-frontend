@@ -1,0 +1,29 @@
+<h1 mat-dialog-title>Upload File</h1>
+<div mat-dialog-content>
+    <form [formGroup]="uploadForm">
+        <div class="form-group">
+            <label for="provider">Provider:</label>
+            <mat-form-field appearance="fill" class="m-3">
+                <mat-label>Provider</mat-label>
+                <mat-select formControlName="provider" id="provider">
+                    <mat-option *ngFor="let provider of providers" [value]="provider">
+                        {{ provider }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div cdkDropList class="upload-drop-zone" (drop)="onDrop($event)" (dragover)="onDragOver($event)">
+            <input type="file" (change)="onFileSelected($event)" hidden #fileInput>
+            <button mat-button (click)="fileInput.click()">Select File</button>
+            <p>or drag and drop file here</p>
+            <div *ngIf="selectedFile">
+                <p>File: {{ selectedFile.name }}</p>
+            </div>
+        </div>
+    </form>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="onCancel()">Cancel</button>
+    <button mat-button [disabled]="!uploadForm.valid || !selectedFile" (click)="onUpload()">Upload</button>
+</div>

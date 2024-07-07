@@ -1,0 +1,21 @@
+<h1 mat-dialog-title class="dialog-title">Add Cluster</h1>
+<div mat-dialog-content class="dialog-content">
+    <form [formGroup]="form">
+        <mat-form-field class="full-width m-2">
+            <mat-label>Image Name</mat-label>
+            <input matInput formControlName="imageName" placeholder="Enter the image name">
+            <mat-error *ngIf="form.controls['imageName'].invalid">Image Name is required</mat-error>
+        </mat-form-field>
+        <mat-form-field class="full-width m-2">
+            <mat-label>Number of Nodes</mat-label>
+            <input matInput type="number" formControlName="numberOfNodes" placeholder="Enter the number of nodes"
+                min="1">
+            <mat-error *ngIf="form.controls['numberOfNodes'].invalid">Number of Nodes is required and must be at least 1
+            </mat-error>
+        </mat-form-field>
+    </form>
+</div>
+<div mat-dialog-actions class="dialog-actions">
+    <button mat-button (click)="close()">Cancel</button>
+    <button mat-raised-button color="primary" (click)="submit()" [disabled]="form.invalid">Add</button>
+</div>
