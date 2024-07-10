@@ -15,14 +15,16 @@
   <vex-widget-large-goal-chart [series]="salesSeries" class="sm:col-span-full" total="4,374">
   </vex-widget-large-goal-chart>
 
-  <vex-widget-quick-value-center [change]="124.4" icon="mat:group" iconClass="text-primary-600 bg-primary-600/10"
-    label="Users" value="67.4k"></vex-widget-quick-value-center>
-  <vex-widget-quick-value-center [change]="-23.7" helpText="Additional information" icon="mat:pageview"
-    iconClass="text-orange-600 bg-orange-600/10" label="Sessions" value="96.2k"></vex-widget-quick-value-center>
-  <vex-widget-quick-value-center [change]="23.2" helpText="Explain something" icon="mat:cloud_off"
-    iconClass="text-orange-600 bg-orange-600/10" label="Bounce Rate" value="6.92%"></vex-widget-quick-value-center>
-  <vex-widget-quick-value-center [change]="34.5" icon="mat:timer" iconClass="text-teal-600 bg-teal/10"
-    label="Session Duration" value="16m 48s"></vex-widget-quick-value-center>
+  <vex-widget-quick-value-center [change]="124.4" icon="mat:data_usage" iconClass="text-primary-600 bg-primary-600/10"
+    label="Network Traffic IN (KBps)" value="67.4"></vex-widget-quick-value-center>
+  <vex-widget-quick-value-center [change]="-23.7" icon="mat:data_usage" iconClass="text-orange-600 bg-orange-600/10"
+    label="Network Traffic OUT (KBps)" value="96.2">
+  </vex-widget-quick-value-center>
+  <vex-widget-quick-value-center [change]="23.2" icon="mat:storage" iconClass="text-orange-600 bg-orange-600/10"
+    label="Disk throughput (KBps)" value="622.92">
+  </vex-widget-quick-value-center>
+  <vex-widget-quick-value-center [change]="34.5" icon="mat:storage" iconClass="text-teal-600 bg-teal/10"
+    label="Disk IOPS" value="16"></vex-widget-quick-value-center>
 
   <vex-widget-large-chart [series]="userSessionsSeries" class="sm:col-span-full"></vex-widget-large-chart>
 
