@@ -11,7 +11,7 @@
     class="subheading-1 font-medium mt-4 mb-0 flex items-center">
     <mat-icon *ngIf="change > 0" class="icon-sm" svgIcon="mat:arrow_drop_up"></mat-icon>
     <mat-icon *ngIf="change <= 0" class="icon-sm" svgIcon="mat:arrow_drop_down"></mat-icon>
-    <span *ngIf="change">{{ change }}%</span>
+    <span *ngIf="change">{{ change }}% compared to Juin</span>
   </h4>
 
   <button *ngIf="helpText" [matTooltip]="helpText" class="absolute top-0 left-0 mt-2 ml-2 text-hint" mat-icon-button

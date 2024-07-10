@@ -32,6 +32,7 @@ import { ImagesService } from './services/images.service';
 import { SpinnerDialogComponent } from 'src/app/core/shared/components/spinner-dialog/spinner-dialog.component';
 import { NotificationService } from 'src/app/core/shared/notification.service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'vex-images',
@@ -138,7 +139,8 @@ export class ImagesComponent implements OnInit, AfterViewInit {
     private domSanitizer: DomSanitizer,
     private imagesService: ImagesService,
     @Inject(PLATFORM_ID) private platformId: string,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private router: Router // Inject the Router service
   ) {
     const awsSvgUrl = 'assets/img/icons/aws.svg';
     const googleCloudSvgUrl = 'assets/img/icons/google-cloud.svg';
@@ -327,6 +329,7 @@ export class ImagesComponent implements OnInit, AfterViewInit {
         console.log('Instance created successfully', response);
         dialogRef.close(); // Close the spinner dialog
         this.notificationService.showSuccess("Instance created successfully")
+        this.router.navigate(['/instances']);
       },
       (error) => {
         console.error('Error creating instance', error);
