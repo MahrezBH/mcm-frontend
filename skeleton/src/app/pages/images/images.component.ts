@@ -290,7 +290,10 @@ export class ImagesComponent implements OnInit, AfterViewInit {
     const url = new URL(downloadUrl);
     const pathParts = url.pathname.split('/');
     const repository = pathParts[2];
-    const imageName = pathParts[5];
+    let imageName = pathParts[5];
+    if (imageName === 'manifests') {
+      imageName = pathParts[4];
+    }
     const version = pathParts[pathParts.length - 1];
     console.log();
 
